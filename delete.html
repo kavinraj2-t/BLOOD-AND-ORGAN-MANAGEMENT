@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donor Details</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff4d4d, #ffe6e6);
+            margin: 0;
+            padding: 0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            text-shadow: 1px 1px 3px #990000;
+        }
+
+       
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 40px auto;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            text-align: center;
+            padding: 15px;
+        }
+
+        thead {
+            background-color: #cc0000;
+            color: white;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #ffe6e6;
+        }
+
+        tbody tr:hover {
+            background-color: #ffcccc;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        footer {
+            margin-top: 40px;
+            color: white;
+            font-size: 0.9em;
+        }
+
+        .blood-drop {
+            color: #cc0000;
+            font-size: 1.3em;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1><span class="blood-drop">🩸</span>Blood Donor Details<span class="blood-drop">🩸</span></h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Blood Group</th>
+                <th>Mobile Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in detail %}
+            <tr>
+                <td>{{ i.name }}</td>
+                <td>{{ i.age }}</td>
+                <td>{{ i.blood_group }}</td>
+                <td>{{ i.mobileno }}</td>
+                <td>
+                    <a href="{{ url_for('delete',id=i.Sno)}}">
+                        <button>Delete</button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% include 'footer.html' %}
+</body>
+</html>

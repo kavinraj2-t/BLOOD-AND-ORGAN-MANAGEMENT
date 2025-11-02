@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Blood Bank with Blood Group Availability</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff4d4d, #ffe6e6);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #333;
+    }
+
+    h2 {
+      color: white;
+      margin-top: 40px;
+      text-shadow: 1px 1px 3px #990000;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 25px 30px;
+      border-radius: 12px;
+      width: 380px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      border-top: 6px solid #cc0000;
+      margin-top: 20px;
+      position: relative;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+      color: #cc0000;
+    }
+
+    input[type="text"],input[type="tel"], select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      transition: border-color 0.3s;
+      font-size: 0.95em;
+    }
+
+    input:focus, select:focus {
+      border-color: #cc0000;
+      outline: none;
+      box-shadow: 0 0 6px rgba(204, 0, 0, 0.3);
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      background-color: #cc0000;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 1em;
+      font-weight: 600;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #a30000;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #cc0000;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: #a30000;
+      text-decoration: underline;
+    }
+
+    .back-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #cc0000;
+      color: #fff;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #a30000;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .multiselect {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .selectBox {
+      position: relative;
+      display: block;
+      cursor: pointer;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: #fff;
+    }
+
+    .selectBox::after {
+      content: "▼";
+      position: absolute;
+      right: 10px;
+      top: 12px;
+      font-size: 0.8em;
+      color: #cc0000;
+    }
+
+    .checkboxes {
+      display: none;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: #fff;
+      max-height: 150px;
+      overflow-y: auto;
+      margin-top: 5px;
+      padding: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+
+    .checkboxes label {
+      display: block;
+      font-weight: normal;
+      margin-bottom: 6px;
+      color: #333;
+    }
+
+    .checkboxes input {
+      margin-right: 6px;
+    }
+
+    .multiselect.open .checkboxes {
+      display: block;
+    }
+
+    @media (max-width: 480px) {
+      form {
+        width: 90%;
+      }
+    }
+     p.success {
+            color: green;
+            text-align: center;
+        }
+
+        p.error {
+            color: red;
+            text-align: center;
+        }
+  </style>
+</head>
+<body>
+
+  <button onclick="window.history.back()" class="back-btn">⬅️ Back</button>
+
+  <h2>Add Blood Bank Details</h2>
+  {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, msg in messages %}
+                <p class="{{ category }}">{{ msg }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+  <form method="POST">
+    <label for="bloodbanksname">Blood Bank Name:</label>
+    <input type="text" id="bloodbanksname" name="bloodbanksname" required placeholder="Enter bloodbanks name">
+
+    <label for="location">Location:</label>
+    <select id="location" name="location" required>
+      <option value="">Select your city</option>
+      <option value="Ahmedabad">Ahmedabad</option>
+      <option value="Bengaluru">Bengaluru</option>
+      <option value="Chennai">Chennai</option>
+      <option value="Delhi">Delhi</option>
+      <option value="Hyderabad">Hyderabad</option>
+      <option value="Kolkata">Kolkata</option>
+      <option value="Mumbai">Mumbai</option>
+      <option value="Pune">Pune</option>
+    </select>
+
+    <label for="contact_no">Contact Number:</label>
+    <input type="tel" id="contact_no" name="contact_no" pattern="[0-9]{10}" required minlength="10" maxlength="10" placeholder="Enter your Contact No">
+
+   
+    <label>Available Blood Groups:</label>
+    <div class="multiselect" id="organSelect">
+      <div class="selectBox">Select Blood Group</div>
+      <div class="checkboxes">
+        <label><input type="checkbox" name="bloodGroup" value="O+">O+</label>
+        <label><input type="checkbox" name="bloodGroup" value="O-">O-</label>
+        <label><input type="checkbox" name="bloodGroup" value="A+">A+</label>
+        <label><input type="checkbox" name="bloodGroup" value="A-">A-</label>
+        <label><input type="checkbox" name="bloodGroup" value="B+">B+</label>
+        <label><input type="checkbox" name="bloodGroup" value="B-">B-</label>
+        <label><input type="checkbox" name="bloodGroup" value="AB+">AB+</label>
+        <label><input type="checkbox" name="bloodGroup" value="AB-">AB-</label>
+      </div>
+    </div>
+
+    <button type="submit">Add Blood bank</button>
+  </form>
+
+  <a href="{{ url_for('bloodbanks') }}">🏥 View Blood Banks</a>
+
+  <script>
+    document.querySelector('.selectBox').addEventListener('click', function() {
+      document.getElementById('organSelect').classList.toggle('open');
+    });
+
+    window.addEventListener('click', function(e) {
+      const multiselect = document.getElementById('organSelect');
+      if (!multiselect.contains(e.target)) {
+        multiselect.classList.remove('open');
+      }
+    });
+  </script>
+{% include 'footer.html' %}
+</body>
+</html>

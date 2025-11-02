@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donation Home</title>
+    <style>
+        body {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #fffaf8;
+        }
+        header {
+            background-color: #c62828;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        nav {
+            background-color: #b71c1c;
+            display: flex;
+            justify-content: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 25px;
+            display: block;
+        }
+        nav a:hover {
+            background-color: #ef5350;
+        }
+        main {
+            margin-bottom: 60px;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .intro {
+            max-width: 600px;
+            margin: auto;
+            font-size: 18px;
+            color: #444;
+        }
+        footer {
+            background-color: #c62828;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position:unset;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <h1>Welcome to Blood Donation Portal</h1>
+        <p>“Donate Blood, Save Lives.”</p>
+    </header>
+
+    <nav>
+        <a href="{{ url_for('register') }}">Register</a>
+        <a href="{{ url_for('donors') }}">View Nearby Donors</a>
+        <a href="{{ url_for('bloodbanks') }}">Blood Banks</a>
+        <a href="{{ url_for('hospitals') }}">Hospitals</a>
+        <a href="{{ url_for('admin_login') }}">Admin Login</a>
+    </nav>
+
+    <main>
+        <h2>Be a Hero – Donate Blood Today!</h2>
+        <p class="intro">
+            Every drop of blood you donate can help save a life. 
+            Join our mission to connect donors, blood banks, and hospitals efficiently.
+        </p>
+    </main>
+    
+{% include 'footer.html' %}
+</body>
+</html>
